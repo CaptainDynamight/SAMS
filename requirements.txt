@@ -1,3 +1,5 @@
 django
 gunicorn
 django-heroku
+dj-database-url
+django-decouple
