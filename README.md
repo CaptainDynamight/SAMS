@@ -4,7 +4,7 @@ Student Attendance Management System (S.A.M.S) is a web application developed fo
 
 This system will help in evaluating attendance eligibility criteria of a student by default is set to be 85% and could be varied by the admin. The faculty can also send messages to parents or guardians about student performance and attendance by shortlisting the students. Hence the communication is facilitated with parents and faculty. The SMS sent to the mobile number of the student's guardian indicating the absence of the student.
 
-You can experience the whole project at **https://project-sams.herokuapp.com/**
+You can preview the whole project at **https://project-sams.herokuapp.com/**
 
 ## Setup Guide
 
