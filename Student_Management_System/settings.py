@@ -27,9 +27,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'c603_%6i*nz&0j$&(+#_r7o3k^u(3d0z9f-p$$*l!ehty7@zod'
 # SECURITY WARNING: don't run with debug turned on in production
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -88,9 +88,14 @@ WSGI_APPLICATION = 'Student_Management_System.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SAMS',
+        'USER': 'postgres',
+        'PASSWORD': 'Zxcvbnm,./12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
 
