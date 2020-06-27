@@ -1,4 +1,4 @@
-# Student-Attendance-Management-System
+# Student Attendance Management System
 
 Student Attendance Management System (S.A.M.S) is a web application developed for daily attendance of students. Previously, the institutions relied heavily on paper records. The project makes use of database in order to keep a record of attendance and is used while generating a report for individual student. The system is fully controlled by administrator who manages staff’s profile, student information and student attendance. The faculties are able to directly access all aspects of the student’s progress through a secure online interface. After the class has been finished, the lecturer can view the student’s attendance that has been saved in the database.
 
