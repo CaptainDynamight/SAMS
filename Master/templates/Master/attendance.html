@@ -1,0 +1,143 @@
+	<!DOCTYPE html>
+	{% load static %}
+	<html lang="en" class="no-js">
+	    <head>
+		    <title>Mark Attendance | S.A.M.S</title>
+		    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'Master/css/linearicons.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/jquery-ui.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/nice-select.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/owl.carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/main.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/style.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/button_style.css' %}">
+        </head>
+		<body>	
+		    <header id="header">
+                <div class="container main-menu">
+                    <div class="row align-items-center justify-content-between d-flex">
+                        <div id="logo">
+                            <a href="/"><img src="{% static 'images/illustrations/logo.png' %}" alt="" title="" /></a>
+                        </div>
+                        <nav id="nav-menu-container">
+                            <ul class="nav-menu">
+                                    <li><a href="/"> Home </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li class="menu-has-children" ><a href="/" style="color:#8490ff;"> Mark Attendance </a>
+										<ul>
+											{% for course_id in course_list %}
+                                                <li><a href="/mark_attendance/{{course_id}}/">{{ course_id }}</a></li>
+											{% endfor %}
+                                        </ul>
+									</li>
+                                    <li><a href="/view/"> View Attendance </a></li>
+                                    <li class="menu-has-children"><a href="/"> Timetable </a>
+                                        <ul>
+                                            <li class="menu-has-children"><a href="/">Year 1</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem1/">Sem 1</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem2/">Sem 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 2</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem3/">Sem 3</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem4/">Sem 4</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 3</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem5/">Sem 5</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem6/">Sem 6</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 4</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem7/">Sem 7</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem8/">Sem 8</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                    <li><a href="/contact/"> Contact </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li><a href="/accounts/logout/" class="genric-btn danger radius small"> Logout </a></li>
+                                {% else %}
+                                    <li><a href="/login/" class="genric-btn danger radius small"> Login </a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+			    <section class="banner-area2">
+				    <div class="container">
+					    <div class="row fullscreen align-items-center justify-content-between">
+						    <div class="col-lg-6 col-md-6 banner-left">
+							    <br><br><br><br><br>
+							    <h6 ><br>Marking Attendance for</h6>
+							    <h1 >{{ course }}</h1>
+							    <p >
+                                <form action="/attendance_submit/" method="post">
+                                    {% csrf_token %}
+                                    {% for st,name in zip_data %}
+                                    <div class="inputGroup">
+                                        <input checked id="{{ st }}" type="checkbox" name="present" value="{{ st }}"/>
+                                        <label for="{{ st }}">{{ name }}  [{{ st }}]</label>
+                                    </div>
+                                    {% endfor %}
+                                    <input type="hidden" name="course" value="{{ course }}">
+                                    <br>
+                                    <input class="tgl tgl-skewed" id="cb3" type="checkbox" name="msgtoggle" value="1"/>
+                                    <label class="tgl-btn" data-tg-off="NO MESSAGE" data-tg-on="SEND MESSAGE" for="cb3"></label>
+                                    <br>
+                                    <div class="single-element-widget">
+								    	<div class="default-select" id="default-select">
+								    		<select required="" name="period">
+								    			<option value="1">Period 1</option>
+								    			<option value="2">Period 2</option>
+								    			<option value="3">Period 3</option>
+								    			<option value="4">Period 4</option>
+								    			<option value="5">Period 5</option>
+                                                <option value="6">Period 6</option>
+								    			<option value="7">Period 7</option>
+								    		</select>
+                                            <input onclick="SubmitAlert()" type="submit" value="Submit" class="genric-btn primary medium">
+								    	</div>
+								    </div>
+                                </form>
+						    </div>
+					    </div>
+				    </div>
+			    </section>
+			<script src="{% static 'Master/js/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'Master/js/popper.min.js' %}"></script>
+			<script src="{% static 'Master/js/bootstrap.min.js' %}"></script>
+  			<script src="{% static 'Master/js/easing.min.js' %}"></script>
+			<script src="{% static 'Master/js/hoverIntent.js' %}"></script>
+			<script src="{% static 'Master/js/superfish.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.magnific-popup.min.js' %}"></script>
+    		<script src="{% static 'Master/js/jquery.tabs.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.nice-select.min.js' %}"></script>
+            <script src="{% static 'Master/js/isotope.pkgd.min.js' %}"></script>
+			<script src="{% static 'Master/js/waypoints.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.counterup.min.js' %}"></script>
+			<script src="{% static 'Master/js/simple-skillbar.js' %}"></script>
+			<script src="{% static 'Master/js/owl.carousel.min.js' %}"></script>
+			<script src="{% static 'Master/js/mail-script.js' %}"></script>
+			<script src="{% static 'Master/js/main.js' %}"></script>
+            <script>
+                function SubmitAlert()
+                {
+                  alert("Submitting attendance for {{ course }}");
+                }
+            </script>
+
+		</body>
+	</html>

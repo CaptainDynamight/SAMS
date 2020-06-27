@@ -1,0 +1,305 @@
+	<!DOCTYPE html>
+    {% load static %}
+	<html lang="en" class="no-js">
+	    <head>
+            <title>View Attendance | S.A.M.S</title>
+            <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'Master/css/linearicons.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/jquery-ui.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/nice-select.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/owl.carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/main.css' %}">
+        </head>
+		<body>
+		    <header id="header">
+                <div class="container main-menu">
+                    <div class="row align-items-center justify-content-between d-flex">
+                        <div id="logo">
+                            <a href="/"><img src="{% static 'images/illustrations/logo.png' %}" alt="" title="" /></a>
+                        </div>
+                        <nav id="nav-menu-container">
+                            <ul class="nav-menu">
+                                    <li><a href="/"> Home </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li class="menu-has-children"><a href="/"> Mark Attendance </a>
+										<ul>
+											{% for course_id in course_list %}
+                                            <li><a href="/mark_attendance/{{course_id}}/">{{ course_id }}</a></li>
+											{% endfor %}
+                                        </ul>
+									</li>
+                                    <li><a href="/view/" style="color:#8490ff;"> View Attendance </a></li>
+                                    <li class="menu-has-children"><a href="/"> Timetable </a>
+                                        <ul>
+                                            <li class="menu-has-children"><a href="/">Year 1</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem1/">Sem 1</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem2/">Sem 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 2</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem3/">Sem 3</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem4/">Sem 4</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 3</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem5/">Sem 5</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem6/">Sem 6</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 4</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem7/">Sem 7</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem8/">Sem 8</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                    <li><a href="/contact/"> Contact </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li><a href="/accounts/logout/" class="genric-btn danger radius small"> Logout </a></li>
+                                {% else %}
+                                    <li><a href="/login/" class="genric-btn danger radius small"> Login </a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <br><br>
+            <section class="view-area section-gap" id="view">
+                <div class="container">
+		            <div class="row d-flex justify-content-center">
+		                <div class="menu-content pb-70 col-lg-8">
+		                    <div class="title text-center">
+		                        <h1 class="mb-10">View Panel</h1>
+		                        <p>Select the course of which you want to view the attendance summary.</p>
+		                    </div>
+		                </div>
+		            </div>
+
+                    <div class="filters">
+                        <ul>
+                            <li data-filter=".year1">Year 1</li>
+                            <li data-filter=".year2">Year 2</li>
+                            <li data-filter=".year3">Year 3</li>
+                            <li data-filter=".year4">Year 4</li>
+                        </ul>
+                    </div>
+
+                    <div class="filters-content">
+                        <div class="row grid">
+                            {% for cid,cname,fname in sem1_zip %}
+                                <div class="single-course col-sm-4 all year1">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+								    	    <div class="middle">
+								    	        <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+								    	    </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem2_zip %}
+                                <div class="single-course col-sm-4 all year1">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+								    	    <div class="middle">
+								    	        <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+								    	    </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem3_zip %}
+                                <div class="single-course col-sm-4 all year2">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+                                            <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem4_zip %}
+                                <div class="single-course col-sm-4 all year2">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+								    	    <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+								    	    </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem5_zip %}
+                                <div class="single-course col-sm-4 all year3">
+                            	    <div class="relative">
+                                        <div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+                                            <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem6_zip %}
+                                <div class="single-course col-sm-4 all year3">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+								    	    <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+								    	    </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem7_zip %}
+                                <div class="single-course col-sm-4 all year4">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+                                            <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                            {% for cid,cname,fname in sem8_zip %}
+                                <div class="single-course col-sm-4 all year4">
+                            	    <div class="relative">
+	                                	<div class="thumb">
+	                                		<div class="overlay overlay-bg"></div>
+	                                	</div>
+								    	<a href="/view/{{ cid }}/">
+                                            <div class="middle">
+                                                <div class="text align-self-center d-flex">
+                                                    <div class="p-inner">
+                                                        <h3 style="color:#ffffff">{{ cid }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+								    	</a>
+                                        <div class="p-inner">
+                                            <h4>{{ cid }}</h4>
+                                            <div class="cat">{{ cname }}</div>
+                                            <div class="cat">| {{ fname }} |</div>
+                                        </div>
+                            	    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+			<script src="{% static 'Master/js/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'Master/js/popper.min.js' %}"></script>
+			<script src="{% static 'Master/js/bootstrap.min.js' %}"></script>
+  			<script src="{% static 'Master/js/easing.min.js' %}"></script>
+			<script src="{% static 'Master/js/hoverIntent.js' %}"></script>
+			<script src="{% static 'Master/js/superfish.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.magnific-popup.min.js' %}"></script>
+    		<script src="{% static 'Master/js/jquery.tabs.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.nice-select.min.js' %}"></script>
+            <script src="{% static 'Master/js/isotope.pkgd.min.js' %}"></script>
+			<script src="{% static 'Master/js/waypoints.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.counterup.min.js' %}"></script>
+			<script src="{% static 'Master/js/simple-skillbar.js' %}"></script>
+			<script src="{% static 'Master/js/owl.carousel.min.js' %}"></script>
+			<script src="{% static 'Master/js/mail-script.js' %}"></script>
+			<script src="{% static 'Master/js/main.js' %}"></script>
+		</body>
+	</html>

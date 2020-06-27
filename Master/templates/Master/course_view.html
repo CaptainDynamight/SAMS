@@ -1,0 +1,161 @@
+	<!DOCTYPE html>
+    {% load static %}
+	<html lang="en" class="no-js">
+	<head>
+		    <title>{{ course_id }} | S.A.M.S</title>
+		    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'Master/css/linearicons.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/jquery-ui.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/nice-select.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/owl.carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'Master/css/main.css' %}">
+		</head>
+		<body>
+		    <header id="header">
+                <div class="container main-menu">
+                    <div class="row align-items-center justify-content-between d-flex">
+                        <div id="logo">
+                            <a href="/"><img src="{% static 'images/illustrations/logo.png' %}" alt="" title="" /></a>
+                        </div>
+                        <nav id="nav-menu-container">
+                            <ul class="nav-menu">
+                                    <li><a href="/"> Home </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li class="menu-has-children"><a href="/"> Mark Attendance </a>
+										<ul>
+											{% for course_id in course_list %}
+                                            <li><a href="/mark_attendance/{{course_id}}/">{{ course_id }}</a></li>
+											{% endfor %}
+                                        </ul>
+									</li>
+                                    <li><a href="/view/"  style="color:#8490ff;"> View Attendance </a></li>
+                                    <li class="menu-has-children"><a href="/"> Timetable </a>
+                                        <ul>
+                                            <li class="menu-has-children"><a href="/">Year 1</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem1/">Sem 1</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem2/">Sem 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 2</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem3/">Sem 3</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem4/">Sem 4</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 3</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem5/">Sem 5</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem6/">Sem 6</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-has-children"><a href="/">Year 4</a>
+                                                <ul>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem7/">Sem 7</a></li>
+                                                    <li><a href="/timetable/{{ dep_id }}/sem8/">Sem 8</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                    <li><a href="/contact/"> Contact </a></li>
+                                {% if request.user.is_authenticated %}
+                                    <li><a href="/accounts/logout/" class="genric-btn danger radius small"> Logout </a></li>
+                                {% else %}
+                                    <li><a href="/login/" class="genric-btn danger radius small"> Login </a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <br><br><br>
+            <div class="whole-wrap">
+				<div class="container">
+                    <div class="col-lg-6 col-md-6 banner-left">
+                        <br><br><br>
+                        <h1>{{ course_id }}</h1>
+                        <h5>{{ course_name }}</h5>
+                        <h5>{{ faculty_name }}</h5>
+                        <h5 >Total Classes : {{ total_classes }}</h5>
+                        <p style="color:#ffffff">
+                    </div>
+					<div class="section-top-border">
+                        <h3 class="mb-30">Eligible Students</h3>
+						<div class="row">
+							<div class="col-lg-12">
+								<blockquote class="generic-blockquote">
+                                    <div class="progress-table-wrap">
+							            <div class="progress-table">
+								            <div class="table-head">
+									            <div class="percentage">USN</div>
+                                                <div class="day">NAME</div>
+                                                <div class="percentage">CLASSES ATTENDED</div>
+                                                <div class="percentage">PERCENTAGE</div>
+								            </div>
+                                            {% for usn,name,class,percent in eligible_zip %}
+                                                <div class="table-row">
+                                                    <div class="percentage">{{ usn }}</div>
+                                                    <div class="day">{{ name }}</div>
+                                                    <div class="percentage">{{ class }}</div>
+                                                    <div class="percentage">{{ percent }}</div>
+								                </div>
+                                            {% endfor %}
+							            </div>
+						            </div>
+                                </blockquote>
+							</div>
+						</div>
+                        <br><br>
+                        <h3 class="mb-30">Not-Eligible Students</h3>
+						<div class="row">
+							<div class="col-lg-12">
+								<blockquote class="generic-blockquote">
+                                    <div class="progress-table-wrap">
+							            <div class="progress-table">
+								            <div class="table-head">
+									            <div class="percentage">USN</div>
+                                                <div class="day">NAME</div>
+                                                <div class="percentage">CLASSES ATTENDED</div>
+                                                <div class="percentage">PERCENTAGE</div>
+								            </div>
+                                            {% for usn,name,class,percent in not_eligible_zip %}
+                                                <div class="table-row">
+                                                    <div class="percentage">{{ usn }}</div>
+                                                    <div class="day">{{ name }}</div>
+                                                    <div class="percentage">{{ class }}</div>
+                                                    <div class="percentage">{{ percent }}</div>
+								                </div>
+                                            {% endfor %}
+							            </div>
+						            </div>
+                                </blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <script src="{% static 'Master/js/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'Master/js/popper.min.js' %}"></script>
+			<script src="{% static 'Master/js/bootstrap.min.js' %}"></script>
+  			<script src="{% static 'Master/js/easing.min.js' %}"></script>
+			<script src="{% static 'Master/js/hoverIntent.js' %}"></script>
+			<script src="{% static 'Master/js/superfish.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.magnific-popup.min.js' %}"></script>
+    		<script src="{% static 'Master/js/jquery.tabs.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.nice-select.min.js' %}"></script>
+            <script src="{% static 'Master/js/isotope.pkgd.min.js' %}"></script>
+			<script src="{% static 'Master/js/waypoints.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.counterup.min.js' %}"></script>
+			<script src="{% static 'Master/js/simple-skillbar.js' %}"></script>
+			<script src="{% static 'Master/js/owl.carousel.min.js' %}"></script>
+			<script src="{% static 'Master/js/mail-script.js' %}"></script>
+			<script src="{% static 'Master/js/main.js' %}"></script>
+		</body>
+	</html>

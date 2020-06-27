@@ -1,0 +1,164 @@
+	<!DOCTYPE html>
+	{% load static %}
+	<html lang="en" class="no-js">
+		<head>
+			<title>Contact | S.A.M.S</title>
+			<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+			<link rel="stylesheet" href="{% static 'Master/css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/jquery-ui.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/nice-select.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'Master/css/main.css' %}">
+		</head>
+		<body>	
+		  	<header id="header">
+		    	<div class="container main-menu">
+		    		<div class="row align-items-center justify-content-between d-flex">
+			      		<div id="logo">
+			        		<a href="/"><img src="{% static 'images/illustrations/logo.png' %}" alt="" title="" /></a>
+			      		</div>
+			      		<nav id="nav-menu-container">
+			        <ul class="nav-menu">
+			          	<li><a href="/" > Home </a></li>
+					  	{% if request.user.is_authenticated %}
+			          		<li class="menu-has-children"><a href="/"> Mark Attendance </a>
+								<ul>
+									{% for course_id in course_list %}
+									<li><a href="/mark_attendance/{{course_id}}/">{{ course_id }}</a></li>
+									{% endfor %}
+								</ul>
+							</li>
+					  		<li><a href="/view/"> View Attendance </a></li>
+						  	<li><a href="/"> Timetable </a>
+								<ul>
+								  	<li class="menu-has-children"><a href="/">Year 1</a>
+										<ul>
+											<li><a href="/timetable/{{ dep_id }}/sem1/">Sem 1</a></li>
+											<li><a href="/timetable/{{ dep_id }}/sem2/">Sem 2</a></li>
+										</ul>
+									</li>
+									<li class="menu-has-children"><a href="/">Year 2</a>
+										<ul>
+											<li><a href="/timetable/{{ dep_id }}/sem3/">Sem 3</a></li>
+											<li><a href="/timetable/{{ dep_id }}/sem4/">Sem 4</a></li>
+										</ul>
+									</li>
+									<li class="menu-has-children"><a href="/">Year 3</a>
+										<ul>
+											<li><a href="/timetable/{{ dep_id }}/sem5/">Sem 5</a></li>
+											<li><a href="/timetable/{{ dep_id }}/sem6/">Sem 6</a></li>
+										</ul>
+									</li>
+									<li class="menu-has-children"><a href="/">Year 4</a>
+										<ul>
+											<li><a href="/timetable/{{ dep_id }}/sem7/">Sem 7</a></li>
+											<li><a href="/timetable/{{ dep_id }}/sem8/">Sem 8</a></li>
+										</ul>
+									</li>
+								</ul>
+						  	</li>
+					  	{% endif %}
+					  <li><a href="/contact/" style="color:#8490ff;"> Contact </a></li>
+					  {% if request.user.is_authenticated %}
+			          <li><a href="/accounts/logout/" class="genric-btn danger radius small"> Logout </a></li>
+					  {% else %}
+					  <li><a href="/login/" class="genric-btn danger radius small"> Login </a></li>
+					  {% endif %}
+			        </ul>
+			      </nav>
+		    	</div>
+		    </div>
+		  	</header>
+			<section class="relative about-banner">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Contact Us
+							</h1>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="contact-page-area section-gap">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-4 d-flex flex-column address-wrap">
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-home"></span>
+								</div>
+								<div class="contact-details">
+									<h5>G-Zero Studios</h5>
+									<p>
+										Bangalore, India
+									</p>
+								</div>
+							</div>
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-phone-handset"></span>
+								</div>
+								<div class="contact-details">
+									<h5>080-28393135</h5>
+									<p>Mobile : 7899826630</p>
+								</div>
+							</div>
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-envelope"></span>
+								</div>
+								<div class="contact-details">
+									<h5>gzerostudios@Gmail.com</h5>
+									<p>Send us your query anytime!</p>
+								</div>
+							</div>														
+						</div>
+						<div class="col-lg-8">
+							<form class="form-area contact-form text-right" action="/contact_submit/" method="post">
+								{% csrf_token %}
+								<div class="row">
+									<div class="col-lg-6 form-group">
+										<input name="name" placeholder="Enter your name" class="common-input mb-20 form-control" required="" type="text">
+
+										<input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" class="common-input mb-20 form-control" required="" type="email">
+										<input name="subject" placeholder="Enter subject" class="common-input mb-20 form-control" required="" type="text">
+									</div>
+									<div class="col-lg-6 form-group">
+									<textarea class="common-textarea form-control" name="message" placeholder="Enter Message" required=""></textarea>
+									</div>
+									<div class="col-lg-12">
+										<button class="genric-btn primary" style="float: right;">Send Message</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<script src="{% static 'Master/js/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'Master/js/popper.min.js' %}"></script>
+			<script src="js/vendor/bootstrap.min.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src="{% static 'Master/js/easing.min.js' %}"></script>
+			<script src="{% static 'Master/js/hoverIntent.js' %}"></script>
+			<script src="{% static 'Master/js/superfish.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.magnific-popup.min.js' %}"></script>
+    		<script src="{% static 'Master/js/jquery.tabs.min.js' %}"></script>
+			<script src="{% static 'Master/js/query.nice-select.min.js' %}"></script>
+            <script src="{% static 'Master/js/isotope.pkgd.min.js' %}"></script>
+			<script src="{% static 'Master/js/waypoints.min.js' %}"></script>
+			<script src="{% static 'Master/js/jquery.counterup.min.js' %}"></script>
+			<script src="{% static 'Master/js/simple-skillbar.js' %}"></script>
+			<script src="{% static 'Master/js/owl.carousel.min.js' %}"></script>
+			<script src="{% static 'Master/js/mail-script.js' %}"></script>
+			<script src="{% static 'Master/js/main.js' %}"></script>
+		</body>
+	</html>
