@@ -27,7 +27,7 @@ To be able to successfully run this web application there are few reuirements th
 
 - Clone the repo or fork it.
 
-- Move into **Student_Management_System**.
+- Move into **Student_Attendance_Management_System**.
 
 - Here you should be able to locate **manage.py** now its time to generate necessary migrations since models are added
 
