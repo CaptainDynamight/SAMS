@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>Login | SAMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Student Attendance Management System">
+    <link href="{% static 'registration/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'registration/login_style.css' %}" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="error"></h1>
+    <div class="two-grids">
+        <div class="mid-class">
+            <div class="txt-left-side">
+                <h2> Login </h2>
+                <p>Enter your details to login.</p>
+                <form action="/login_submit/" method="post">
+                    {% csrf_token %}
+                    <div class="form-left-to">
+                        <span class="fa fa-user-circle-o" aria-hidden="true"></span>
+                        <input type="text" name="username" placeholder="Username" required="">
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-left-to">
+                        <span class="fa fa-lock" aria-hidden="true"></span>
+                        <input type="password" name="password" placeholder="Password" required="">
+                        <div class="clear"></div>
+                    </div>
+                    <div class="main-two">
+                        <div class="left-side-forget">
+                            <input type="checkbox" class="checked">
+                            <span class="remenber-me">Remember me </span>
+                        </div>
+                        <div class="right-side-forget">
+                            <a href="#" class="for">Forgot password...?</a>
+                        </div>
+                    </div>
+                    <div class="btnn">
+                        <button type="submit"> Login </button>
+                    </div>
+                </form>
+                <div class="more-buttn">
+                    <h3>Don't Have an account..?
+                        <a href="#">Contact Admin</a>
+                    </h3>
+                </div>
+
+            </div>
+            <div class="img-right-side">
+                <h3>Welcome To SAMS</h3>
+                <p>Student Attendance Management System[SAMS] provides an easier way to monitor your students' attendance records without having to hassle about maintaining the physical records and preparing the paperwork.</p>
+                <img src="{% static 'images/illustrations/b11.png' %}" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
