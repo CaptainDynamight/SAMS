@@ -6,24 +6,30 @@ This system will help in evaluating attendance eligibility criteria of a student
 
 You can preview the whole project at **https://project-sams.herokuapp.com/**
 
-## Setup Guide
+(Note : Testing Account Credentials)
 
-### Requirements
+```username : fcs05```
 
-To be able to successfully run this web application there are few reuirements that have to be satisfied and these include :
+```password : passcs05```
+
+## 🚀 Installation :
+
+### ➖ Requirements
+
+To be able to successfully run this web application there are few requirements that have to be satisfied and these include :
 
 - Python 3.7 or higher
   which you can obtain [here](https://www.python.org/downloads/).
 
-- Django using
+- Get all dependencies using
 
   ```
-  pip install Django
+  pip install requirements.txt
   ```
 
 - An SMS API, here we have used the API provided by [160by2](https://www.160by2.com/) (Optional).
 
-### Instructions
+### ➖ Instructions
 
 - Clone the repo or fork it.
 
@@ -56,3 +62,8 @@ To be able to successfully run this web application there are few reuirements th
   **http://127.0.0.1:8000/admin/** to access the admin panel
 
   **http://127.0.0.1:8000/** to access the home page
+
+
+## ❗ Bugs
+
+- Return to home page after admin authentication raises 'Index Error'
