@@ -92,17 +92,6 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-"""DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SAMS',
-        'USER': 'postgres',
-        'PASSWORD': 'Zxcvbnm,./12345',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}"""
-
 
 
 # Password validation
