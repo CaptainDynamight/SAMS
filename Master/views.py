@@ -48,7 +48,9 @@ def sendMsg(date, absentees, no_of_absentees):
 
     for z in range(no_of_absentees):
         mobile_no = str(absentees_phone[z])
-        message = "You ward %s studying in Semester %s has not attended the classes on %s and is currently having the attendance percentage of %s.\n-Dr. Manjunath R\n HOD, Dept of CSE\n RRIT\n" % (absentees_name[z], absentees_sem[z], date, attendance_percent[z])
+        message = "You ward %s studying in Semester %s has not attended the classes on %s and is currently having " \
+                  "the attendance percentage of %s.\n-Dr. Manjunath R\n HOD, Dept of CSE\n RRIT\n" % \
+                  (absentees_name[z], absentees_sem[z], date, attendance_percent[z])
         sendPostRequest(URL, 'your key', 'your key', 'stage', mobile_no, 'identifier', message)
 
 
