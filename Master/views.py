@@ -73,7 +73,7 @@ def create_log(request, attendees, no_of_attendees, course_id, period, msgtoggle
     date = date.strftime("%d %B %Y")
     if msgtoggle == '1':
         sendMsg(date, absentees, no_of_absentees)
-    filename = './Logs/%s.txt' % course_id
+    """filename = './Logs/%s.txt' % course_id
     try:
         file = open(filename, 'x')
         file.write('ATTENDANCE LOG COURSE %s \n\n\n' % course_id)
@@ -86,7 +86,7 @@ def create_log(request, attendees, no_of_attendees, course_id, period, msgtoggle
     for x, y in zip(absentees, absentees_names):
         file.write('%s \t %s \n' % (x, y))
     file.write('--------------------------------------------------------')
-    file.close()
+    file.close()"""
 
 
 def user_login(request):
