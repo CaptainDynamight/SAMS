@@ -24,7 +24,7 @@ To be able to successfully run this web application there are few requirements t
 - Get all dependencies using
 
   ```
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
 
 - An SMS API, here we have used the API provided by [160by2](https://www.160by2.com/) (Optional).
